@@ -88,8 +88,19 @@ void swap(int *a,int k){
   }
 
   void  SelectionSort(int *M){
-    
-  }
+    int i,j,im,temp;
+    for(i=0;i<size-1;i++){
+      im=i;
+      for(j=i+1;j<size;j++){
+        if(M[j]<M[im])
+        im=j;}
+        if(i!=im){
+          temp=M[i];
+          M[i]=M[im];
+          M[im]=temp;
+        }
+      }
+    }
   
   int main(){
     int A[size],B[size];
