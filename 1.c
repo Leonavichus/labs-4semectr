@@ -20,25 +20,24 @@
     for(i=0;i<size;i++)
       K[i]=M[i];
   }
+void swap(int *a,int k){
+    int q;
+    q=a[k];
+    a[k]=a[k-1];
+    a[k-1]=q;
+}
   
-  void Bubble(int (*swap)(void),int *M){
-    int i,j,q;
+  void Bubble(int *M){
+    int i,j;
     for(i=0;i<size-1;i++)
       for(j=size-1;j>i;j--){
         if(M[j-1]>M[j]){
-          swap();
+          swap(M,j);
         }
       }
   }
   
-  void swap(int *M,int i,int j,int q){
-          q=M[j];
-          M[j]=M[j-1];
-          M[j-1]=q;
-  }
-
   int main(){
-    int i,j,q;
     int A[size],B[size];
     makeArr(A);
     printArr(A);
@@ -46,7 +45,7 @@
     printf("\n");
     printArr(B);
     printf("\n");
-    Bubble(swap,B);
+    Bubble(B);
     printArr(B);
     copyArr(A,B);
   }
