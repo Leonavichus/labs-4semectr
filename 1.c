@@ -35,74 +35,82 @@ void svap(int *a,int k){
 }
   
   void Bubble(int *M){
-    int i,j;
+    int i,j,c=0,p=0;
     for(i=0;i<size-1;i++)
-      for(j=size-1;j>i;j--){
-        if(M[j-1]>M[j]){
+      for(j=size-1;j>i;j--){c++;
+        if(M[j-1]>M[j]){p++;
           swap(M,j);
         }
       }
+  printf("compar=%d,reshuffle=%d\n",c,p);
   }
 
   void Bubble_New(int *M){
-    int i,j = 0,m;
+    int i,j = 0,m,c=0,p=0;
     do{
       m=j;
-      for(i=size-1;i>m;i--){
+      for(i=size-1;i>m;i--){c++;
         if(M[i-1]>M[i]){
-          j=i;
+          j=i;p++;
           swap(M,j);
         }
       }
     } while(j-m);
+  printf("compar=%d,reshuffle=%d\n",c,p);
   }
 
   void Shaker(int *M){
-    int i,t,n1=0,n2=size-1,j;
+    int i,t,n1=0,n2=size-1,j,c=0,p=0;
     do{
-      for(i=n2;i > n1;i--) {
-        if(M[i-1]>M[i]){
+      for(i=n2;i > n1;i--) {c++;
+        if(M[i-1]>M[i]){p++;
           svap(M,i);
           j=i;
         }
       }
     n1=j;
-    for(i=n1;i<=n2;i++){
+    for(i=n1;i<=n2;i++){c++;
       if(M[i-1]>M[i]){
         svap(M,i);
-        j=i;
+        j=i;p++;
       }
     }
     n2=j-1;
     } while(n1<n2);
+  printf("compar=%d,reshuffle=%d\n",c,p);
   }
 
   void InsertSort(int *M){
-    int i,j,temp;
+    int i,j,temp,c=0;
+    double p=0;
     for(i=1;i<size;i++){
       if(M[i]<M[i-1]){
-        temp=M[i];
-      for(j=i-1;j>=0 && M[j]>temp;j--){
+        temp=M[i];p+=1./3;
+      for(j=i-1;j>=0 && M[j]>temp;j--,c++){
         M[j+1]=M[j];
       }
-      M[j+1]=temp;
+      M[j+1]=temp;p+=1./3;
       }
     }
+    printf("compar=%d,reshuffle=%lf\n",c,p);
   }
 
   void  SelectionSort(int *M){
-    int i,j,im,temp;
+    int i,j,im,temp,c=0,p=0;
     for(i=0;i<size-1;i++){
       im=i;
-      for(j=i+1;j<size;j++){
+      for(j=i+1;j<size;j++){c++;
         if(M[j]<M[im])
         im=j;}
+        c++;
         if(i!=im){
+          p++;
           temp=M[i];
           M[i]=M[im];
           M[im]=temp;
         }
       }
+    printf("compar=%d,reshuffle=%d\n",c,p);
     }
   
   int main(){
