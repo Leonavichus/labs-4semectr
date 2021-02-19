@@ -26,6 +26,13 @@ void swap(int *a,int k){
     a[k]=a[k-1];
     a[k-1]=q;
 }
+
+void svap(int *a,int k){
+    int q;
+    q=a[k-1];
+    a[k-1]=a[k];
+    a[k]=q;
+}
   
   void Bubble(int *M){
     int i,j;
@@ -55,18 +62,14 @@ void swap(int *a,int k){
     do{
       for(i=n2;i > n1;i--) {
         if(M[i-1]>M[i]){
-          t=M[i-1];
-          M[i-1]=M[i];
-          M[i]=t;
+          svap(M,i);
           j=i;
         }
       }
     n1=j;
     for(i=n1;i<=n2;i++){
       if(M[i-1]>M[i]){
-        t=M[i-1];
-        M[i-1]=M[i];
-        M[i]=t;
+        svap(M,i);
         j=i;
       }
     }
