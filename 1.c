@@ -53,7 +53,7 @@ const int size = 8;
   }
 
   void Shaker(int *arr){
-    int i,t,n1=0,n2=size-1,j,c=0,p=0;
+    int i,j,n1=0,n2=size-1,c=0,p=0;
     do{
       for(i=n2;i > n1;i--) {c++;
         if(arr[i-1]>arr[i]){p++;
@@ -88,7 +88,7 @@ const int size = 8;
     printf("compar=%d,reshuffle=%lf\n",c,p);
   }
 
-  void  SelectionSort(int *arr){
+  void SelectionSort(int *arr){
     int i,j,im,temp,c=0,p=0;
     for(i=0;i<size-1;i++){
       im=i;
@@ -154,4 +154,3 @@ const int size = 8;
     printArr(B);
     copyArr(A,B);
   }
-
