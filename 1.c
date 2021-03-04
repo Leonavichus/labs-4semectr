@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 
-const int size = 5;
+const int size = 16;
 
   void makeArr(int *A){
     srand(time(NULL));
@@ -77,15 +77,15 @@ const int size = 5;
     int i,j,temp,c=0;
     double p=0;
     for(i=1;i<size;i++){
-      if(arr[i]<arr[i-1]){
         temp=arr[i];p+=1./3;
-      for(j=i-1;j>=0 && arr[j]>temp;j--,c++){
-        arr[j+1]=arr[j];
-      }
-      arr[j+1]=temp;p+=1./3;
-      }
+        j=i-1;
+        while(j>=0 && arr[j]>temp) {c++;
+              arr[j+1]=arr[j];
+              j=j-1;
+          }
+    arr[j+1]=temp;p+=1./3;
     }
-    printf("compar=%d,reshuffle=%lf\n",c,p);
+  printf("compar=%d,reshuffle=%lf\n",c,p);
   }
 
   void SelectionSort(int *arr){
@@ -154,4 +154,5 @@ const int size = 5;
     printArr(B);
     copyArr(A,B);
   }
+
 
