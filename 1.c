@@ -1,77 +1,70 @@
 #include <stdio.h>
 #include <time.h>
-  const int size = 8;
 
-  void makeArr(int *M){
+const int size = 8;
+
+  void makeArr(int *A){
     srand(time(NULL));
     int i;
     for(i=0;i<size;i++)
-    M[i] = rand() % 51;
+    A[i] = rand() % 51;
   }
 
-  void printArr(int *M){
+  void printArr(int *A){
     int i;
     for(i=0;i<size;i++)
-    printf("%d\t",M[i]);
+    printf("%d\t",A[i]);
   }
 
-  void copyArr(int *M, int *K){
+  void copyArr(int *A, int *B){
     int i;
     for(i=0;i<size;i++)
-      K[i]=M[i];
+      B[i]=A[i];
   }
-void swap(int *a,int k){
-    int q;
-    q=a[k];
-    a[k]=a[k-1];
-    a[k-1]=q;
-}
+  void swap(int *x, int *y){
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+  }
 
-void svap(int *a,int k){
-    int q;
-    q=a[k-1];
-    a[k-1]=a[k];
-    a[k]=q;
-}
-  
-  void Bubble(int *M){
+  void Bubble(int *arr){
     int i,j,c=0,p=0;
     for(i=0;i<size-1;i++)
-      for(j=size-1;j>i;j--){c++;
-        if(M[j-1]>M[j]){p++;
-          swap(M,j);
+      for(j=0;j<size-i-1;j++){c++;
+        if(arr[j]>arr[j+1]){p++;
+          swap(&arr[j], &arr[j + 1]);
         }
       }
   printf("compar=%d,reshuffle=%d\n",c,p);
   }
 
-  void Bubble_New(int *M){
+  void Bubble_New(int *arr){
     int i,j = 0,m,c=0,p=0;
     do{
       m=j;
       for(i=size-1;i>m;i--){c++;
-        if(M[i-1]>M[i]){
+        if(arr[i-1]>arr[i]){
           j=i;p++;
-          swap(M,j);
+          swap(&arr[j], &arr[j - 1]);
         }
       }
     } while(j-m);
   printf("compar=%d,reshuffle=%d\n",c,p);
   }
 
-  void Shaker(int *M){
+  void Shaker(int *arr){
     int i,t,n1=0,n2=size-1,j,c=0,p=0;
     do{
       for(i=n2;i > n1;i--) {c++;
-        if(M[i-1]>M[i]){p++;
-          svap(M,i);
+        if(arr[i-1]>arr[i]){p++;
+          swap(&arr[i -1], &arr[i]);
           j=i;
         }
       }
     n1=j;
     for(i=n1;i<=n2;i++){c++;
-      if(M[i-1]>M[i]){
-        svap(M,i);
+      if(arr[i-1]>arr[i]){
+        swap(&arr[i-1], &arr[i]);
         j=i;p++;
       }
     }
@@ -80,49 +73,47 @@ void svap(int *a,int k){
   printf("compar=%d,reshuffle=%d\n",c,p);
   }
 
-  void InsertSort(int *M){
+  void InsertSort(int *arr){
     int i,j,temp,c=0;
     double p=0;
     for(i=1;i<size;i++){
-      if(M[i]<M[i-1]){
-        temp=M[i];p+=1./3;
-      for(j=i-1;j>=0 && M[j]>temp;j--,c++){
-        M[j+1]=M[j];
+      if(arr[i]<arr[i-1]){
+        temp=arr[i];p+=1./3;
+      for(j=i-1;j>=0 && arr[j]>temp;j--,c++){
+        arr[j+1]=arr[j];
       }
-      M[j+1]=temp;p+=1./3;
+      arr[j+1]=temp;p+=1./3;
       }
     }
     printf("compar=%d,reshuffle=%lf\n",c,p);
   }
 
-  void  SelectionSort(int *M){
+  void  SelectionSort(int *arr){
     int i,j,im,temp,c=0,p=0;
     for(i=0;i<size-1;i++){
       im=i;
       for(j=i+1;j<size;j++){c++;
-        if(M[j]<M[im])
+        if(arr[j]<arr[im])
         im=j;}
         c++;
         if(i!=im){
           p++;
-          temp=M[i];
-          M[i]=M[im];
-          M[im]=temp;
+          swap(&arr[im], &arr[i]);
         }
       }
     printf("compar=%d,reshuffle=%d\n",c,p);
     }
   
-	void Shella(int *M){
+	void Shella(int *arr){
 		int i,j,temp,step = size/2,c=0,p=0;
 		while(step>0){
 			for(i=0;i<(size - step);i++){c++;
 			j=i;
-			while(j>=0 && M[j]>M[j+step]){
+			while(j>=0 && arr[j]>arr[j+step]){
 				c++;p++;
-				temp=M[j];
-				M[j]=M[j+step];
-				M[j+step]=temp;
+				temp=arr[j];
+				arr[j]=arr[j+step];
+				arr[j+step]=temp;
 				j--;
 			}
 			}
@@ -158,8 +149,9 @@ void svap(int *a,int k){
     SelectionSort(B);
     printArr(B);
     copyArr(A,B);
-		printf("\n Shella:\n");
+	  printf("\n Shella:\n");
     Shella(B);
     printArr(B);
     copyArr(A,B);
   }
+
