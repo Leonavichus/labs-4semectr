@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 
-const int size = 8;
+const int size = 5;
 
   void makeArr(int *A){
     srand(time(NULL));
@@ -39,7 +39,7 @@ const int size = 8;
   }
 
   void Bubble_New(int *arr){
-    int i,j = 0,m,c=0,p=0;
+    int i,j=0,m,c=0,p=0;
     do{
       m=j;
       for(i=size-1;i>m;i--){c++;
@@ -48,23 +48,23 @@ const int size = 8;
           swap(&arr[j], &arr[j - 1]);
         }
       }
-    } while(j-m);
+    } while(j-m>0);
   printf("compar=%d,reshuffle=%d\n",c,p);
   }
 
   void Shaker(int *arr){
     int i,j,n1=0,n2=size-1,c=0,p=0;
     do{
-      for(i=n2;i > n1;i--) {c++;
+      for(i=n2;i>n1;i--) {c++;
         if(arr[i-1]>arr[i]){p++;
-          swap(&arr[i -1], &arr[i]);
+          swap(&arr[i], &arr[i - 1]);
           j=i;
         }
       }
     n1=j;
     for(i=n1;i<=n2;i++){c++;
       if(arr[i-1]>arr[i]){
-        swap(&arr[i-1], &arr[i]);
+        swap(&arr[i], &arr[i - 1]);
         j=i;p++;
       }
     }
@@ -154,3 +154,4 @@ const int size = 8;
     printArr(B);
     copyArr(A,B);
   }
+
