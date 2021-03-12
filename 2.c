@@ -14,7 +14,7 @@ unsigned long fib(int n){
     return fib(n-1)+fib(n-2);
 }
 
-double Rec_step(int a,int b){
+double Rec_step(float a,int b){
   if(b <= 0) 
     return 1.0;
   else
