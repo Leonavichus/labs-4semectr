@@ -50,7 +50,7 @@ void printd(int k){
 
 void Reverse(){
   int ch;
-  if((ch=getch())!='\r'){
+  if((ch=getch()) !='\r'){
     Reverse();
     putchar(ch);
   }
@@ -64,8 +64,16 @@ int sum(int *s,int n){
 }
 
 int main() {
-  int k = 4,l=7;
+  int k=4,l=7,c=2,v=3,d=4,y=5;
+  float j=3.4;
+  double f=3.45;
   printf("n!=%f\n",Rec_Fact(k));
   printf("fib_l=%lu\n",fib(l));
+  printf("Rec_step=%f\n",Rec_step(j,c));
+  printf("rec_degree=%f\n",rec_degree(f,v));
+  printf("NOD_rec=%d\n",NOD_rec(d,y));
+  printd(l);
+  Reverse();
+  printf("sum=%d\n",sum(d,c));
   return 0;
 }
