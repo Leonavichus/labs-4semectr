@@ -41,16 +41,16 @@ int NOD_rec(int a,int b){
 void printd(int k){
   if(k<0){
     putchar('-');
-    k= -k;
-  }
+    k= -k;}
   if(k/10)
     printd(k/10);
   putchar(k%10 +'0');
 }
 
+
 void Reverse(){
   int ch;
-  if((ch=getch()) !='\r'){
+  if((ch=getchar()) !='\r'){
     Reverse();
     putchar(ch);
   }
@@ -64,16 +64,11 @@ int sum(int *s,int n){
 }
 
 int main() {
-  int k=4,l=7,c=2,v=3,d=4,y=5;
-  float j=3.4;
-  double f=3.45;
-  printf("n!=%f\n",Rec_Fact(k));
-  printf("fib_l=%lu\n",fib(l));
-  printf("Rec_step=%f\n",Rec_step(j,c));
-  printf("rec_degree=%f\n",rec_degree(f,v));
-  printf("NOD_rec=%d\n",NOD_rec(d,y));
-  printd(l);
+  printf("n!=%f\n",Rec_Fact(4));
+  printf("fib_l=%lu\n",fib(7));
+  printf("Rec_step=%f\n",Rec_step(2,3));
+  printd(-459);
   Reverse();
-  printf("sum=%d\n",sum(d,c));
+  rec_degree(2,5);
   return 0;
 }
