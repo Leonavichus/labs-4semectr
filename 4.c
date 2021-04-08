@@ -12,7 +12,7 @@ typedef struct uroboros{
 } gamedev;
 
 
-void enter_arr(gamedev * arr)
+void makeArr(gamedev * arr)
 {
   for (int i = 0; i < N; i++)
   {
@@ -23,13 +23,13 @@ void enter_arr(gamedev * arr)
   }
 }
 
-void output_arr(gamedev * arr){
+void printArr(gamedev * arr){
     for (int i = 0; i < N; i++){
       printf("%d. Команда %s заняла %d место\n",i + 1,arr[i].name,arr[i].result);
     }
 }
 
-void Select (gamedev * arr){
+void Select(gamedev * arr){
     char temp2[100];
     int i,j,im,temp;
     for(i=0;i<N-1;i++){
@@ -50,7 +50,7 @@ void Select (gamedev * arr){
 
 int main(void){
   gamedev clubs[N];
-  enter_arr(clubs);
+  makeArr(clubs);
   Select(clubs);
-  output_arr(clubs);
+  printArr(clubs);
 }
