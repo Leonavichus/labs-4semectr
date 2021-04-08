@@ -15,13 +15,18 @@ void enter_arr(gamedev * arr)
 {
   for (int i = 0; i < N; i++)
   {
-    printf("Введите имя и результат: ");
+    printf("Введите имя %d команды и результат: ", i+1);
     scanf("%s%d",arr[i].name,&arr[i].result);
     //printf("Введите уровень: ");
     //scanf("%d", &arr[i].level);
   }
 }
 
+void output_arr(gamedev * arr){
+    for (int i = 0; i < N; i++){
+      printf("%d. Команда %s заняла %d место\n",i + 1,arr[i].name,arr[i].result);
+    }
+}
 
 void Insert (gamedev * arr){
     int i,j, temp;
@@ -33,12 +38,6 @@ void Insert (gamedev * arr){
         j--;
       }
       arr[j+1].result = temp;
-    }
-}
-
-void output_arr(gamedev * arr){
-    for (int i = 0; i < N; i++){
-      printf("Команда %s заняла %d место\n",arr[i].name,arr[i].result);
     }
 }
 
