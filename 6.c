@@ -63,7 +63,7 @@ int main(void){
   setlocale(LC_CTYPE,"Russian");
   pSTACK ps = createstack();
   char c;
-  for(c='a';c<='z';c++)
+  for(c='a';c<='{';c++)
     push(ps,c);
   while(!isempty(ps)){
     pop(ps);
@@ -72,4 +72,3 @@ int main(void){
   }
   return 0;
 }
-
