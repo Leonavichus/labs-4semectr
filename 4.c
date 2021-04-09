@@ -11,7 +11,6 @@ typedef struct uroboros{
   int result;
 } gamedev;
 
-
 void makeArr(gamedev * arr)
 {
   for (int i = 0; i < N; i++)
@@ -30,42 +29,19 @@ void printArr(gamedev * arr){
 }
 
 void Select(gamedev * arr){
-    char temp2[100];
-    int i,j,im,temp,temp1;
+    gamedev temp;
+    int i,j,im;
     for(i=0;i<N-1;i++){
       im=i;
       for(j=i+1;j<N;j++){
         if(arr[j].result<arr[im].result)
         im=j;}
         if(i!=im){
-          temp = arr[im].result;
-          arr[im].result = arr[i].result;
-          arr[i].result = temp;
-          temp1 = arr[im].level;
-          arr[im].level = arr[i].level;
-          arr[i].level = temp1;
-          strcpy(temp2,arr[i].name);
-          strcpy(arr[i].name,arr[im].name);
-          strcpy(arr[im].name,temp2);
-    }
+          temp = arr[im];
+          arr[im] = arr[i];
+          arr[i] = temp;
+    } 
   }
-    for(i=0;i<N-1;i++){
-        im=i;
-        for(j=i+1;j<N;j++){
-          if(arr[j].level<arr[im].level && arr[im].result == arr[j].level)
-          im=j;}
-          if(i!=im){
-            temp = arr[im].result;
-            arr[im].result = arr[i].result;
-            arr[i].result = temp;
-            temp1 = arr[im].level;
-            arr[im].level = arr[i].level;
-            arr[i].level = temp1;
-            strcpy(temp2,arr[i].name);
-            strcpy(arr[i].name,arr[im].name);
-            strcpy(arr[im].name,temp2);
-      }
-    }
 }
 
 int main(void){
