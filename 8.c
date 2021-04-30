@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
+#include <math.h> 
 
 typedef struct Node{
   int val;
@@ -32,7 +33,7 @@ pNODE GetPointer(pLIST pL,int date){
   pNODE temp = pL->top;
     if(temp->val<=date) return temp;
   while(temp->next && temp->next->val>date)
-  temp=temp->next;
+    temp=temp->next;
     return temp;
 }
 
@@ -67,6 +68,7 @@ void showList(pLIST pL){
     printf("Length List: %d\n",pL->len);
     while(temp){
       printf("adres: %p\t Value: %d\t next:%p\n", temp,temp->val,temp->next);
+      temp = temp->next;
     }
   }
 }
@@ -98,4 +100,58 @@ void clearLIST(pLIST pL){
 void deleteList(pLIST pL){
   if(!isEmpty(pL)) clearLIST(pL);
   free(pL);
+}
+
+int main(void){
+  pLIST pL = create_list();
+  pNODE p;
+  char exit = 0;
+  int com;
+  while(1){
+    puts("1-add element");
+    puts("2-find the element");
+    puts("3-delete the element");
+    puts("4-show list");
+    puts("5-clear list");
+    puts("0-end of work");
+    scanf("%d",&com);
+    switch(com){
+      case 0: exit = 1;break;
+      case 1: printf("vvedite chislo:");
+              scanf("%d",&com);
+              addNodeAfter(pL,GetPointer(pL,com),com);
+              break;
+      case 2: printf("Enter chislo:");
+              scanf("%d",&com);
+              p = findNode(pL,com);
+              if(p){
+                p = (p==pL->top && com==pL->top->val) ? p:p->next;
+                printf("chislo %d in list, address: %p/n", com,p);
+              }
+              else
+                printf("Chislo %d not find in list!\n",com);
+              break;
+      case 3: printf("Enter chislo:");
+              scanf("%d",&com);
+              p = findNode(pL,com);
+              if(p){
+                if(p==pL->top && com==pL->top->val){
+                  pL->top = p->next;
+                  pL->len--;
+                  free(p);
+                  printf("Delete complete!\n\n");
+                }
+                else
+                if(delNode(pL,p))printf("Delete complete!\n\n");
+              }
+              else
+                printf("A integer %d does not contain in list!\n",com);
+              break;
+      case 4: showList(pL); break;
+      case 5: clearLIST(pL); showList(pL);
+    };
+    if(exit) break;
+  }
+  deleteList(pL);
+  return 0;
 }
