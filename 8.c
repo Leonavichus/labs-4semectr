@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-#include <math.h> 
+#include <math.h>
+#include <time.h>
 
 typedef struct Node{
   int val;
@@ -113,6 +114,7 @@ int main(void){
     puts("3-delete the element");
     puts("4-show list");
     puts("5-clear list");
+    puts("6 - random elements");
     puts("0-end of work");
     scanf("%d",&com);
     switch(com){
@@ -149,6 +151,12 @@ int main(void){
               break;
       case 4: showList(pL); break;
       case 5: clearLIST(pL); showList(pL);
+      case 6: printf("Kolichestvo chisel:");
+              scanf("%d", &com);
+              srand(time(NULL));
+              while(com--){
+              addNodeAfter(pL,GetPointer(pL,rand()%101),rand()%101);
+              }
     };
     if(exit) break;
   }
