@@ -1,4 +1,4 @@
-#include <stdafz.h>
+
 #include <stdio.h>
 #include <malloc.h>
 #include <stdlib.h>
@@ -20,14 +20,14 @@ int dist(int a,int b);
 int main(void){
     setlocale(LC_ALL,"Russian");
     FILE *out;
-    int i; maxnum=10;
+    int i, maxnum=10;
     T *a;
     // printf("Kol el maxnum");
     // scanf("%d", &maxnum);
     printf("hashTableSize:");
     scanf("%d",&hashTableSize);
-    a = (*T)malloc(sizeof(int)*maxnum);
-    hashTable = (*T)malloc(sizeof(int)*hashTableSize);
+    a = (T*)malloc(sizeof(int)*maxnum);
+    hashTable = (T*)malloc(sizeof(int)*hashTableSize);
     used = (char*)malloc(hashTableSize);
     for(i=0;i<hashTableSize;i++){
         hashTable[i] = 0;
@@ -42,7 +42,7 @@ int main(void){
         findData(a[i]);
     out = fopen("C:\\List_close.txt","w");
     for(i=0;i<maxnum;i++)
-        fprintf(out,""%d; \n",a[i]);
+        fprintf(out,"%d; \n",a[i]);
         fclose(out);
         out = fopen("D:HashTable_close.txt","w");
     for(i=0;i<hashTableSize;i++)
@@ -77,7 +77,7 @@ int findData(T data){
     bucket = myhash(data);
     while(used[bucket] && hashTable[bucket] != data)
         bucket = (bucket + 1) % hashTableSize;
-    return used[bucket] && hashTable[bucket] == data
+    return used[bucket] && hashTable[bucket] == data;
 }
 
 int dist(int a,int b){
