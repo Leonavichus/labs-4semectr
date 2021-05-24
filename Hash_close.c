@@ -1,0 +1,110 @@
+#include <stdafz.h>
+#include <stdio.h>
+#include <malloc.h>
+#include <stdlib.h>
+#include <time.h>
+#include <locale.h>
+
+
+typedef int T;
+int hashTableSize;
+T *hashTable;
+char *used;
+
+int myhash(T data);
+void insertData(T data);
+void deleteData(T data);
+int findData(T data);
+int dist(int a,int b);
+
+int main(void){
+    setlocale(LC_ALL,"Russian");
+    FILE *out;
+    int i; maxnum=10;
+    T *a;
+    // printf("Kol el maxnum");
+    // scanf("%d", &maxnum);
+    printf("hashTableSize:");
+    scanf("%d",&hashTableSize);
+    a = (*T)malloc(sizeof(int)*maxnum);
+    hashTable = (*T)malloc(sizeof(int)*hashTableSize);
+    used = (char*)malloc(hashTableSize);
+    for(i=0;i<hashTableSize;i++){
+        hashTable[i] = 0;
+        used[i] = 0;
+    }
+    srand(time(NULL));
+    for(i=0;i<maxnum;i++)
+        a[i] = rand()%100;
+    for(i=0;i<maxnum;i++)
+        insertData(a[i]);
+    for(i=0;i<maxnum;i++)
+        findData(a[i]);
+    out = fopen("C:\\List_close.txt","w");
+    for(i=0;i<maxnum;i++)
+        fprintf(out,""%d; \n",a[i]);
+        fclose(out);
+        out = fopen("D:HashTable_close.txt","w");
+    for(i=0;i<hashTableSize;i++)
+        fprintf(out,"%d; (%d)%d\n", i, used[i],hashTable[i]);
+        fclose(out);
+    for(i = maxnum-1;i>-1;i--){
+        deleteData(a[i]);
+    }
+    free(a);
+    free(hashTable);
+    free(used);
+    return 0;
+}
+
+int myhash(T data){
+    return(data % hashTableSize);
+}
+
+void insertData(T data){
+    int bucket;
+    bucket = myhash(data);
+    while(used[bucket] && hashTable[bucket] != data)
+        bucket = (bucket + 1) % hashTableSize;
+    if(!used[bucket]){
+        used[bucket] = 1;
+        hashTable[bucket] = data;
+    }
+}
+
+int findData(T data){
+    int bucket;
+    bucket = myhash(data);
+    while(used[bucket] && hashTable[bucket] != data)
+        bucket = (bucket + 1) % hashTableSize;
+    return used[bucket] && hashTable[bucket] == data
+}
+
+int dist(int a,int b){
+    return(b-a+hashTableSize)%hashTableSize;
+}
+
+void deleteData(T data){
+    int bucket,gap;
+    bucket = myhash(data);
+    while(used[bucket] && hashTable[bucket] != data)
+        bucket = (bucket + 1) % hashTableSize;
+    if(used[bucket] && hashTable[bucket] == data){
+        used[bucket] = 0;
+        gap = bucket;
+        bucket = (bucket + 1) % hashTableSize;
+        while(used[bucket]){
+            if(bucket == myhash(hashTable[bucket]))
+                bucket = (bucket + 1) % hashTableSize;
+            else if(dist(myhash(hashTable[bucket]),bucket)<dist(gap,bucket))
+                bucket = (bucket + 1) % hashTableSize;
+            else{
+                used[gap] = 1;
+                hashTable[gap] = hashTable[bucket];
+                used[bucket] = 0;
+                gap = bucket;
+                bucket = (bucket + 1) % hashTableSize;
+            }
+        }
+    }
+}
