@@ -45,16 +45,16 @@ void postorder(pNODE root){
 void inorder (pNODE root){
   if (root){
     inorder (root->left);
-    inorder (root->right);
     printf ("%d;",root->key);
+    inorder (root->right);
   }
 }
 
 pNODE find_tree (pNODE root, int val){
   if (!root) return NULL;
   if(val==root->key) return root;
-  if(val< root->key) return find_tree(root->left, val);
-  if(val>= root->key) return find_tree(root->right,val);
+  if(val<root->key) return find_tree(root->left, val);
+  if(val>=root->key) return find_tree(root->right,val);
 }
 
 int rightmost (pNODE root){
