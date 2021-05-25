@@ -57,10 +57,12 @@ int main(void){
     return 0;
 }
 
+//хэщ-функция размещения величины
 int myhash(T data){
     return(data % hashTableSize);
 }
 
+//функция поиска местоположения и вставки величины в таблицу
 void insertData(T data){
     int bucket;
     bucket = myhash(data);
@@ -72,6 +74,7 @@ void insertData(T data){
     }
 }
 
+//функция поиска величины, равной data. Возвращает 1(найдено) или 0
 int findData(T data){
     int bucket;
     bucket = myhash(data);
@@ -80,10 +83,12 @@ int findData(T data){
     return used[bucket] && hashTable[bucket] == data;
 }
 
+//функция вычисления растояние от a до b
 int dist(int a,int b){
     return(b-a+hashTableSize)%hashTableSize;
 }
 
+//функция удаления величины из таблицы
 void deleteData(T data){
     int bucket,gap;
     bucket = myhash(data);
