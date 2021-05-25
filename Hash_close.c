@@ -57,7 +57,7 @@ int main(void){
     return 0;
 }
 
-//хэщ-функция размещения величины
+//хэш-функция размещения величины
 int myhash(T data){
     return(data % hashTableSize);
 }
