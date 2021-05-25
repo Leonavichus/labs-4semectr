@@ -9,6 +9,7 @@ typedef struct node{
   struct node *left, *right;
 }NODE, *pNODE;
 
+//добавление узла
 pNODE addnode(int x, pNODE root){
   if (!root){
     root =(pNODE) malloc (sizeof(NODE));
@@ -26,6 +27,8 @@ pNODE addnode(int x, pNODE root){
   return root;
 }
 
+//прохождение дерева
+// нисходящее
 void preorder (pNODE root){
   if (root){
     printf("%d;",root->key);
@@ -34,6 +37,7 @@ void preorder (pNODE root){
   }
 }
 
+//восходящее
 void postorder(pNODE root){
   if (root){
     postorder (root->left);
@@ -42,6 +46,7 @@ void postorder(pNODE root){
   }
 }
 
+//последовательное
 void inorder (pNODE root){
   if (root){
     inorder (root->left);
@@ -50,6 +55,7 @@ void inorder (pNODE root){
   }
 }
 
+//поиск узла в дереве
 pNODE find_tree (pNODE root, int val){
   if (!root) return NULL;
   if(val==root->key) return root;
@@ -57,12 +63,14 @@ pNODE find_tree (pNODE root, int val){
   if(val>=root->key) return find_tree(root->right,val);
 }
 
+//поиск крайнего правого элемента
 int rightmost (pNODE root){
   while (root->right)
     root=root->right;
   return root->key;
 }
 
+//удаление узла из дерева
 pNODE del_tree (pNODE root, int val){
   if (!root) return NULL;
   if (root->key==val){
@@ -95,6 +103,7 @@ pNODE del_tree (pNODE root, int val){
   return root;
 }
 
+//подсчет узлов
 void Nnodes (pNODE root, int *p){
   if (!root) return;
     (*p)++;
@@ -102,6 +111,7 @@ void Nnodes (pNODE root, int *p){
     Nnodes(root->right, p);
 }
 
+//определение высоты дерева
 void Height(pNODE root, int p,int* h){
   if(!root) return;
   p++;
@@ -111,6 +121,7 @@ void Height(pNODE root, int p,int* h){
   Height(root->right,p,h);
 }
 
+//удаление всех узлов
 void del_all(pNODE *root){
   if (!*root) return;
   del_all (&(*root)->left);
