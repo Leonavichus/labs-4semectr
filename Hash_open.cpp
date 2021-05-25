@@ -27,8 +27,8 @@ pNode insertNode(T data);
 void deleteNode(T data);
 pNode findNode(T data);
 int kolchar(char *s);
-int main()
-{
+
+int main(void){
     int i, k, maxnum = 26;
     T a[26];
     char s[255], *ps = s;
@@ -92,13 +92,13 @@ int main()
     return 0;
 }
 
-hashTableIndex myhash(T data)
-{
+//хэш-функция размещения величины
+hashTableIndex myhash(T data){
     return (data.c % hashTableSize);
 }
 
-pNode insertNode(T newdata)
-{
+//функция поиска местоположения и вставки вершины в таблицу
+pNode insertNode(T newdata){
     pNode p, p0;
     hashTableIndex bucket;
     bucket = myhash(newdata);
@@ -114,8 +114,8 @@ pNode insertNode(T newdata)
     return p;
 }
 
-void deleteNode(T data)
-{
+//фунция удаления вершины из таблицы
+void deleteNode(T data){
     pNode p0, p;
     hashTableIndex bucket;
     p0 = NULL;
@@ -135,8 +135,8 @@ void deleteNode(T data)
     free(p);
 }
 
-pNode findNode(T data)
-{
+//функция поиска вершины со значением data
+pNode findNode(T data){
     Node *p;
     p = hashTable[myhash(data)];
     while (p && !compEQ(p->data.c, data.c))
@@ -144,8 +144,8 @@ pNode findNode(T data)
     return p;
 }
 
-int kolchar(char *s)
-{
+//возвращает кол-во вхождений в строку
+int kolchar(char *s){
     int k = 1, i, j;
     for (i = j = 1; s[i]; i++)
         if (s[i] != s[0])
