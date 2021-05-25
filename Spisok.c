@@ -15,6 +15,7 @@ typedef struct List{
   int len;
 }LIST,*pLIST;
 
+//создание нового списка
 pLIST create_list(){
   pLIST pL;
   pL = (pLIST)malloc(sizeof(LIST));
@@ -24,11 +25,13 @@ pLIST create_list(){
     return pL;
 }
 
+//проверка наполнености списка
 int isEmpty(pLIST pL){
   if(pL->top && pL->len) return 0;
     return 1;
 }
 
+//определение вставки следующего узла
 pNODE GetPointer(pLIST pL,int date){
   if(isEmpty(pL)) return NULL;
   pNODE temp = pL->top;
@@ -38,6 +41,7 @@ pNODE GetPointer(pLIST pL,int date){
     return temp;
 }
 
+//добавление в список нового элемента
 int addNodeAfter(pLIST pL,pNODE pN, int newdate){
   pNODE pnew = (pNODE)malloc(sizeof(NODE));
   if(pnew){
@@ -62,6 +66,7 @@ int addNodeAfter(pLIST pL,pNODE pN, int newdate){
   return 0;
 }
 
+//просмотр элементов списка
 void showList(pLIST pL){
   if(isEmpty(pL)) printf("List is empty!!\n");
   else{
@@ -74,6 +79,7 @@ void showList(pLIST pL){
   }
 }
 
+//нахождение в списке узла
 pNODE findNode(pLIST pL,int date){
   if(isEmpty(pL)) return NULL;
   pNODE temp = pL->top;
@@ -83,6 +89,7 @@ pNODE findNode(pLIST pL,int date){
   return NULL;
 }
 
+//удаление узла
 int delNode(pLIST pL,pNODE pN){
   if(!pN) return 0;
   pNODE temp = pN->next;
@@ -92,12 +99,14 @@ int delNode(pLIST pL,pNODE pN){
   return 1;
 }
 
+//удаление всех узлов
 void clearLIST(pLIST pL){
   while(pL->top->next) delNode(pL, pL->top);
   free(pL->top);
   pL->len--;
 }
 
+//удаление списка
 void deleteList(pLIST pL){
   if(!isEmpty(pL)) clearLIST(pL);
   free(pL);
