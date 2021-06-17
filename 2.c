@@ -62,13 +62,3 @@ int sum(int *s,int n){
   else
     return sum(s,n-1) + s[n-1];
 }
-
-int main() {
-  printf("n!=%f\n",Rec_Fact(4));
-  printf("fib_l=%lu\n",fib(7));
-  printf("Rec_step=%f\n",Rec_step(2,3));
-  printd(-459);
-  Reverse();
-  rec_degree(2,5);
-  return 0;
-}
